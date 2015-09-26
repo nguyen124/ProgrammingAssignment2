@@ -2,7 +2,7 @@
 ## functions do
 
 ## Write a short comment describing this function
-
+## This function will receive a matrix as input then return a list of functions associating with this input
 makeCacheMatrix <- function(data = matrix()) {
   cacheMatrix <- NULL
   setData <-function(y)
@@ -24,7 +24,8 @@ makeCacheMatrix <- function(data = matrix()) {
 
 
 ## Write a short comment describing this function
-
+## This function is used the list of functions as input to get the invert of matrix. 
+## If the matrix has been calculated, the invert matrix won't be calculated again
 cacheSolve <- function(functionsList, ...) {
   ## Return a matrix that is the inverse of 'x'
   cacheMatrix<-functionsList$getMatrix()
