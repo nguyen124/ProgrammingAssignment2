@@ -5,6 +5,7 @@
 ## This function will receive a matrix as input then return a list of functions associating with this input
 makeCacheMatrix <- function(data = matrix()) {
   cacheMatrix <- NULL
+  ## Getter and Setter for data
   setData <-function(y)
   {
     data <<-y
@@ -13,12 +14,14 @@ makeCacheMatrix <- function(data = matrix()) {
   getData <-function(){
     data
   }
+  ## Getter and Setter for cacheMatrix
   setMatrix<-function(m){
     cacheMatrix <<-m
   }
   getMatrix <-function(){
     cacheMatrix
   }
+  ## return list of functions
   list(setData=setData,getData=getData,setMatrix=setMatrix,getMatrix=getMatrix)
 }
 
@@ -27,15 +30,19 @@ makeCacheMatrix <- function(data = matrix()) {
 ## This function is used the list of functions as input to get the invert of matrix. 
 ## If the matrix has been calculated, the invert matrix won't be calculated again
 cacheSolve <- function(functionsList, ...) {
-  ## Return a matrix that is the inverse of 'x'
+  
+  ## get the matrix, if cacheMatrix is not null it means the matrix has been calculated for the inverse matrix
+  ## so we dont have to calculate it again
   cacheMatrix<-functionsList$getMatrix()
   if(!is.null(cacheMatrix)){
     message("getting cached matrix")
     return (cacheMatrix)
   }
+  ## if the cacheMatrix is null, let calculate the inverse of matrix 
   data<-functionsList$getData();
   inverMatrix<- solve(data)
   functionsList$setMatrix(inverMatrix)
+  ## Return a "inverse matrix" that is the inverse of 'matrix'
   inverMatrix
 }
 
@@ -67,4 +74,4 @@ cacheSolve <- function(functionsList, ...) {
 ## [1,]    1    0
 ## [2,]    0    1
 ##
-##
+## if the result is an identity matrix, we've done correctly
